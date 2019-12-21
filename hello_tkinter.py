@@ -1,10 +1,9 @@
-from tkinter import *
+import tkinter as tk
 
 
-root = Tk()
+root = tk.Tk()
 
-myLabel = Label(root, text="Hello Word")
-
-myLabel.pack()
+canvas = tk.Canvas(root, height=400, width=400, bg="green")
+canvas.pack()
 
 root.mainloop()
