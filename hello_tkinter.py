@@ -19,7 +19,7 @@ class Field:
         self.canvas = tk.Canvas(root, height=self.size, width=self.size, bg='green')
         self.canvas.bind('<Button-1>', self.add_sheep)
         self.canvas.bind('<Button-3>', self.change_wolf_position)
-        self.canvas.grid(row=1, column=0, columnspan=3)
+        self.canvas.grid(row=1, column=0, columnspan=20)
         self.wolf = self.canvas.create_rectangle(self.half_size - 2, self.half_size - 2, self.half_size + 2, self.half_size + 2, fill='red')
 
     def add_sheep(self, event):
@@ -76,6 +76,14 @@ class Field:
         else:
             messagebox.showinfo('Information','Simulation cannot be started due to lack of sheeps on the field')
 
+    def reset(self):
+        self.canvas.delete("all")
+        self.wolf = self.canvas.create_rectangle(self.half_size - 2, self.half_size - 2, self.half_size + 2, self.half_size + 2, fill='red')
+        self.sheeps.clear()
+
+
+
 field = Field()
-button = tk.Button(root, text='Step', command=field.step).grid(row=0, column=0, sticky='W')
+button = tk.Button(root, text='Step', command=field.step).grid(row=0, column=0, sticky='nesw')
+button = tk.Button(root, text='Reset', command=field.reset).grid(row=0, column=1, sticky='nesw')
 root.mainloop()
