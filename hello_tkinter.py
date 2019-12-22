@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from random import choice
 from math import sqrt, inf
 
@@ -72,6 +73,8 @@ class Field:
         if len(self.sheeps) is not 0:
             self.sheep_move()
             self.wolf_move()
+        else:
+            messagebox.showinfo('Information','Simulation cannot be started due to lack of sheeps on the field')
 
 field = Field()
 button = tk.Button(root, text='Step', command=field.step).grid(row=0, column=0, sticky='W')
