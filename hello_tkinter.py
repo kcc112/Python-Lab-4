@@ -7,7 +7,7 @@ sheep_move_dist = 5.0
 wolf_move_dist = 50.0
 root = tk.Tk()
 root.title('Task 4')
-root.geometry('800x600')
+root.geometry('600x600')
 
 
 class Field:
@@ -18,7 +18,7 @@ class Field:
         self.canvas = tk.Canvas(root, height=self.size, width=self.size, bg='green')
         self.canvas.bind('<Button-1>', self.add_sheep)
         self.canvas.bind('<Button-3>', self.change_wolf_position)
-        self.canvas.grid(row=0, column=0, sticky='W')
+        self.canvas.grid(row=1, column=0, columnspan=3)
         self.wolf = self.canvas.create_rectangle(self.half_size - 2, self.half_size - 2, self.half_size + 2, self.half_size + 2, fill='red')
 
     def add_sheep(self, event):
@@ -74,5 +74,5 @@ class Field:
             self.wolf_move()
 
 field = Field()
-button = tk.Button(root, text='Step', command=field.step).grid(row=0, column=1)
+button = tk.Button(root, text='Step', command=field.step).grid(row=0, column=0, sticky='W')
 root.mainloop()
