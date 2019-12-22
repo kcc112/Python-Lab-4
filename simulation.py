@@ -21,9 +21,13 @@ class Field:
         self.canvas.bind('<Button-3>', self.change_wolf_position)
         self.canvas.grid(row=1, column=0, columnspan=20)
         self.wolf = self.canvas.create_rectangle(self.half_size - 2, self.half_size - 2, self.half_size + 2, self.half_size + 2, fill='red')
+        self.label1_text = tk.StringVar()
+        self.label1_text.set(f'Number of sheeps alive: {len(self.sheeps)}')
+        self.label1 = tk.Label(root, textvariable=self.label1_text).grid(row=0, column=3, sticky='nesw')
 
     def add_sheep(self, event):
         self.sheeps.append(self.canvas.create_rectangle(event.x - 2, event.y - 2, event.x + 2, event.y + 2, fill='blue'))
+        self.label1_text.set(f'Number of sheeps alive: {len(self.sheeps)}')
 
     def change_wolf_position(self, event):
         self.canvas.coords(self.wolf, event.x - 2, event.y - 2, event.x + 2, event.y + 2)
@@ -75,15 +79,16 @@ class Field:
             self.wolf_move()
         else:
             messagebox.showinfo('Information','Simulation cannot be started due to lack of sheeps on the field')
+        self.label1_text.set(f'Number of sheeps alive: {len(self.sheeps)}')
 
     def reset(self):
         self.canvas.delete("all")
         self.wolf = self.canvas.create_rectangle(self.half_size - 2, self.half_size - 2, self.half_size + 2, self.half_size + 2, fill='red')
         self.sheeps.clear()
-
+        self.label1_text.set(f'Number of sheeps alive: {len(self.sheeps)}')
 
 
 field = Field()
-button = tk.Button(root, text='Step', command=field.step).grid(row=0, column=0, sticky='nesw')
-button = tk.Button(root, text='Reset', command=field.reset).grid(row=0, column=1, sticky='nesw')
+button1 = tk.Button(root, text='Step', command=field.step).grid(row=0, column=0, sticky='nesw')
+button2 = tk.Button(root, text='Reset', command=field.reset).grid(row=0, column=1, sticky='nesw')
 root.mainloop()
